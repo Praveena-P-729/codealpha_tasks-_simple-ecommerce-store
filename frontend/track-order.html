@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Track Your Order | Aura Store</title>
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🛒</text></svg>">
+</head>
+<body>
+
+  <!-- Top Announcement Bar -->
+  <div style="background-color: #1e1b4b; color: #cbd5e1; font-size: 0.8rem; text-align: center; padding: 0.45rem 1rem;">
+    🚚 Fast nationwide shipping on all orders | Need assistance? Contact 24/7 customer support.
+  </div>
+
+  <!-- Header -->
+  <header class="header">
+    <div class="container header-inner">
+      <a href="index.html" class="brand">
+        <div class="brand-icon">⚡</div>
+        <div class="brand-name">Aura<span>Store</span></div>
+      </a>
+
+      <nav class="nav-actions">
+        <a href="index.html" class="nav-link">Store Catalog</a>
+        <a href="track-order.html" class="nav-link active">Track Order</a>
+        <div class="auth-nav-slot">
+          <a href="login.html" class="nav-link"><span>👤</span><span>Sign In</span></a>
+        </div>
+        <button class="cart-btn cart-toggle-btn" aria-label="Shopping Cart">
+          <span>🛒</span>
+          <span>Cart</span>
+          <span class="cart-badge" style="display: none;">0</span>
+        </button>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Track Order Main Content -->
+  <main class="container" style="padding-bottom: 5rem;">
+    <div class="track-card">
+      <div style="text-align: center; margin-bottom: 2rem;">
+        <span style="font-size: 2.2rem;">📦</span>
+        <h1 style="font-size: 1.75rem; font-weight: 800; color: var(--dark); margin: 0.5rem 0;">Track Order Status</h1>
+        <p style="color: var(--text-muted); font-size: 0.95rem;">
+          Enter your Order Confirmation ID (e.g., <code>ORD-2026-1001</code>) to track your delivery progress in real-time.
+        </p>
+      </div>
+
+      <!-- Search Input Box -->
+      <form id="trackOrderForm" style="display: flex; gap: 0.75rem; margin-bottom: 2rem;" onsubmit="return false;">
+        <input type="text" id="trackOrderIdInput" class="form-input" style="flex: 1; text-transform: uppercase; font-weight: 600;" placeholder="e.g. ORD-2026-1001" required>
+        <button type="submit" id="trackSubmitBtn" class="btn btn-primary" style="padding: 0 1.5rem;">
+          Track
+        </button>
+      </form>
+
+      <!-- Order Details Display Area -->
+      <div id="trackResultArea" style="display: none;">
+        <!-- Header status -->
+        <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border); padding-bottom: 1rem; margin-bottom: 1.5rem; flex-wrap: wrap; gap: 0.5rem;">
+          <div>
+            <span style="font-size: 0.8rem; color: var(--text-subtle); text-transform: uppercase; font-weight: 700;">Order ID</span>
+            <div id="trkDisplayId" style="font-size: 1.2rem; font-weight: 800; color: var(--dark);">-</div>
+          </div>
+          <span id="trkStatusBadge" class="tracking-status-badge" style="background: var(--primary-light); color: var(--primary);">-</span>
+        </div>
+
+        <!-- Visual Timeline -->
+        <div class="tracking-timeline">
+          <div class="timeline-step completed" id="stepPlaced">
+            <div class="step-circle">1</div>
+            <div style="font-size: 0.8rem; font-weight: 700;">Order Placed</div>
+            <div id="trkPlacedDate" style="font-size: 0.72rem; color: var(--text-subtle);">-</div>
+          </div>
+          <div class="timeline-step completed" id="stepProcessing">
+            <div class="step-circle">2</div>
+            <div style="font-size: 0.8rem; font-weight: 700;">Processing</div>
+            <div style="font-size: 0.72rem; color: var(--text-subtle);">Verified</div>
+          </div>
+          <div class="timeline-step active" id="stepShipped">
+            <div class="step-circle">3</div>
+            <div style="font-size: 0.8rem; font-weight: 700;">In Transit</div>
+            <div id="trkCarrierName" style="font-size: 0.72rem; color: var(--text-subtle);">-</div>
+          </div>
+          <div class="timeline-step" id="stepDelivered">
+            <div class="step-circle">4</div>
+            <div style="font-size: 0.8rem; font-weight: 700;">Delivered</div>
+            <div id="trkEstDelivery" style="font-size: 0.72rem; color: var(--text-subtle);">-</div>
+          </div>
+        </div>
+
+        <!-- Shipping & Tracking Info -->
+        <div style="background: #f8fafc; border-radius: 10px; padding: 1.25rem; border: 1px solid var(--border); margin-bottom: 1.75rem;">
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+            <div>
+              <span style="font-size: 0.75rem; text-transform: uppercase; color: var(--text-subtle); font-weight: 700;">Tracking Number</span>
+              <div id="trkTrackingNumber" style="font-weight: 700; color: var(--dark);">-</div>
+            </div>
+            <div>
+              <span style="font-size: 0.75rem; text-transform: uppercase; color: var(--text-subtle); font-weight: 700;">Carrier</span>
+              <div id="trkCarrier" style="font-weight: 600; color: var(--dark);">-</div>
+            </div>
+            <div style="grid-column: span 2;">
+              <span style="font-size: 0.75rem; text-transform: uppercase; color: var(--text-subtle); font-weight: 700;">Delivering To</span>
+              <div id="trkDestination" style="font-size: 0.88rem; color: var(--text-main); margin-top: 2px;">-</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Ordered Items Summary -->
+        <h4 style="font-size: 0.95rem; font-weight: 700; margin-bottom: 0.75rem; color: var(--dark);">Items in this Shipment</h4>
+        <div id="trkItemsList" style="margin-bottom: 1.5rem;">
+          <!-- Items injected -->
+        </div>
+
+        <div style="display: flex; justify-content: space-between; font-weight: 800; font-size: 1.1rem; border-top: 1px dashed var(--border); padding-top: 1rem;">
+          <span>Total Order Amount</span>
+          <span id="trkTotalAmount" style="color: var(--primary);">$0.00</span>
+        </div>
+      </div>
+
+      <!-- Error State -->
+      <div id="trackErrorArea" style="display: none; text-align: center; padding: 2rem 1rem; color: var(--danger);">
+        <p id="trackErrorMessage" style="font-weight: 600; margin-bottom: 0.5rem;"></p>
+        <p style="font-size: 0.85rem; color: var(--text-muted);">
+          Please ensure your Order ID is typed correctly (e.g. <code>ORD-2026-1001</code>).
+        </p>
+      </div>
+    </div>
+  </main>
+
+  <!-- Slide-Out Shopping Cart Drawer -->
+  <div class="cart-drawer-overlay" id="cartOverlay"></div>
+  <aside class="cart-drawer" id="cartDrawer" aria-label="Shopping Cart Drawer">
+    <div class="cart-header">
+      <div class="cart-title">
+        <span>🛒</span>
+        <span>Your Shopping Cart</span>
+      </div>
+      <button class="cart-close-btn" id="cartCloseBtn" aria-label="Close cart">✕</button>
+    </div>
+    <div class="cart-items-list" id="cartItemsContainer"></div>
+    <div class="cart-footer">
+      <div class="cart-summary-line total">
+        <span>Subtotal</span>
+        <span id="cartSubtotal">$0.00</span>
+      </div>
+      <a href="checkout.html" class="btn btn-primary btn-block btn-lg" style="margin-top: 1rem;">Proceed to Checkout</a>
+    </div>
+  </aside>
+
+  <!-- Toast Notification Container -->
+  <div class="toast-container" id="toastContainer"></div>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-bottom">
+        &copy; 2026 AuraStore Inc. All rights reserved.
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="js/api.js"></script>
+  <script src="js/cart.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/track.js"></script>
+</body>
+</html>

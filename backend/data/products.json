@@ -1,0 +1,401 @@
+[
+  {
+    "id": 1,
+    "title": "Aura Pro Wireless Noise-Cancelling Headphones",
+    "slug": "aura-pro-wireless-headphones",
+    "price": 149.99,
+    "originalPrice": 199.99,
+    "discountPercentage": 25,
+    "category": "Electronics",
+    "rating": 4.8,
+    "reviewCount": 240,
+    "stock": 18,
+    "featured": true,
+    "badge": "Best Seller",
+    "image": "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&w=800&q=80",
+    "gallery": [
+      "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1484704849700-f032a568e944?auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1546435770-a3e426bf472b?auto=format&fit=crop&w=800&q=80"
+    ],
+    "description": "Experience pristine acoustics with the Aura Pro. Featuring industry-leading active noise cancellation, ultra-soft memory foam earcups, and up to 40 hours of playtime on a single fast charge.",
+    "features": [
+      "Hybrid Active Noise Cancellation (ANC)",
+      "40 Hours battery life with Quick Charge (10 mins = 4 hours)",
+      "Custom 40mm Titanium Dynamic Drivers",
+      "Multipoint Bluetooth 5.3 connection",
+      "Built-in quad microphone array with ENC for clear calls"
+    ],
+    "specifications": {
+      "Brand": "AuraSound",
+      "Connectivity": "Bluetooth 5.3 / 3.5mm AUX",
+      "Battery Life": "Up to 40 Hours",
+      "Weight": "250g",
+      "Warranty": "1 Year Manufacturer"
+    }
+  },
+  {
+    "id": 2,
+    "title": "Apex Smart Fitness & Health Tracker Watch",
+    "slug": "apex-smart-fitness-tracker",
+    "price": 79.99,
+    "originalPrice": 109.99,
+    "discountPercentage": 27,
+    "category": "Electronics",
+    "rating": 4.7,
+    "reviewCount": 185,
+    "stock": 24,
+    "featured": true,
+    "badge": "Popular",
+    "image": "https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=800&q=80",
+    "gallery": [
+      "https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1508685096489-7aacd43bd3b1?auto=format&fit=crop&w=800&q=80"
+    ],
+    "description": "Track your vitality 24/7 with Apex Smartwatch. Includes real-time heart rate monitoring, SpO2 sensor, sleep phase analysis, GPS route tracking, and water resistance up to 50 meters.",
+    "features": [
+      "1.43-inch AMOLED Always-On Display with 466x466 resolution",
+      "5ATM Water Resistance (Swimming safe)",
+      "Over 100+ Sports & Workout modes",
+      "Continuous Heart Rate, SpO2, and Sleep tracking",
+      "7-Day typical battery endurance"
+    ],
+    "specifications": {
+      "Brand": "ApexFit",
+      "Display": "1.43\" AMOLED Screen",
+      "Water Resistance": "5ATM (50m)",
+      "Battery": "300 mAh (7-10 Days)",
+      "Compatibility": "iOS & Android"
+    }
+  },
+  {
+    "id": 3,
+    "title": "Nomad Minimalist Waterproof Leather Backpack",
+    "slug": "nomad-minimalist-leather-backpack",
+    "price": 64.99,
+    "originalPrice": 89.99,
+    "discountPercentage": 28,
+    "category": "Fashion",
+    "rating": 4.9,
+    "reviewCount": 94,
+    "stock": 12,
+    "featured": true,
+    "badge": "Top Rated",
+    "image": "https://images.unsplash.com/photo-1553062407-98eeb64c6a62?auto=format&fit=crop&w=800&q=80",
+    "gallery": [
+      "https://images.unsplash.com/photo-1553062407-98eeb64c6a62?auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1548036328-c9fa89d128fa?auto=format&fit=crop&w=800&q=80"
+    ],
+    "description": "The Nomad Backpack balances sleek minimalist urban aesthetics with rugged everyday utility. Constructed from water-repellent vegan leather with dedicated padded compartment for 16-inch laptops.",
+    "features": [
+      "Water-repellent PU vegan leather exterior",
+      "Padded compartment holds up to 16-inch laptop",
+      "Anti-theft hidden back pocket for passport and wallet",
+      "Ergonomic padded airflow shoulder straps",
+      "Luggage strap pass-through for easy travel"
+    ],
+    "specifications": {
+      "Material": "Premium Vegan Leather",
+      "Capacity": "22 Liters",
+      "Dimensions": "44cm x 30cm x 15cm",
+      "Laptop Pocket": "Fits up to 16 inches",
+      "Weight": "850g"
+    }
+  },
+  {
+    "id": 4,
+    "title": "Artisan Precision Pour-Over Coffee Maker",
+    "slug": "artisan-pour-over-coffee-maker",
+    "price": 38.5,
+    "originalPrice": 49.99,
+    "discountPercentage": 23,
+    "category": "Home & Kitchen",
+    "rating": 4.6,
+    "reviewCount": 112,
+    "stock": 16,
+    "featured": false,
+    "badge": "Hot",
+    "image": "https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?auto=format&fit=crop&w=800&q=80",
+    "gallery": [
+      "https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?auto=format&fit=crop&w=800&q=80"
+    ],
+    "description": "Master the art of pour-over brewing. Crafted with heat-resistant borosilicate glass, stainless steel micro-mesh permanent filter, and a heat-insulated natural wood collar.",
+    "features": [
+      "Heat-resistant borosilicate glass carafe",
+      "Double-layer 304 stainless steel permanent filter (no paper needed)",
+      "Natural polished wooden collar with leather tie",
+      "800ml (approx. 5-6 cups) capacity",
+      "Easy to rinse and dishwasher safe"
+    ],
+    "specifications": {
+      "Brand": "ArtisanBrew",
+      "Capacity": "800ml",
+      "Material": "Borosilicate Glass & 304 Stainless Steel",
+      "Dishwasher Safe": "Yes (Carafe & Filter)",
+      "Origin": "Imported"
+    }
+  },
+  {
+    "id": 5,
+    "title": "Retro Tactile RGB Mechanical Gaming Keyboard",
+    "slug": "retro-tactile-rgb-mechanical-keyboard",
+    "price": 99,
+    "originalPrice": 129,
+    "discountPercentage": 23,
+    "category": "Electronics",
+    "rating": 4.8,
+    "reviewCount": 310,
+    "stock": 9,
+    "featured": true,
+    "badge": "New",
+    "image": "https://images.unsplash.com/photo-1587829741301-dc798b83add3?auto=format&fit=crop&w=800&q=80",
+    "gallery": [
+      "https://images.unsplash.com/photo-1587829741301-dc798b83add3?auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1618384887929-16ec33fab9ef?auto=format&fit=crop&w=800&q=80"
+    ],
+    "description": "Bring satisfaction back to every keystroke. Featuring hot-swappable tactile brown switches, per-key RGB backlighting, custom PBT double-shot keycaps, and durable anodized aluminum top frame.",
+    "features": [
+      "Hot-swappable mechanical switches (compatible with 3-pin & 5-pin)",
+      "Per-key RGB with 18 dynamic lighting presets",
+      "Sound-dampening silicone gaskets for creamy acoustic feedback",
+      "Tri-mode connectivity: Bluetooth 5.0, 2.4Ghz wireless, USB-C wired",
+      "Mac & Windows layout switch"
+    ],
+    "specifications": {
+      "Layout": "75% Compact (82 Keys)",
+      "Switch Type": "Gateron Brown Tactile",
+      "Keycaps": "PBT Dye-Sublimation",
+      "Battery": "4000 mAh rechargeable",
+      "Weight": "920g"
+    }
+  },
+  {
+    "id": 6,
+    "title": "CloudStep Breathable Road Running Shoes",
+    "slug": "cloudstep-breathable-running-shoes",
+    "price": 72,
+    "originalPrice": 95,
+    "discountPercentage": 24,
+    "category": "Fashion",
+    "rating": 4.5,
+    "reviewCount": 160,
+    "stock": 15,
+    "featured": false,
+    "badge": "Comfort",
+    "image": "https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&w=800&q=80",
+    "gallery": [
+      "https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&w=800&q=80"
+    ],
+    "description": "Designed for maximum shock absorption and boundless energy return. Engineered breathable jacquard knit upper keeps feet cool, while the responsive foam midsole supports every stride.",
+    "features": [
+      "Ultra-breathable seamless mesh upper",
+      "Dual-density high-rebound cushioning sole",
+      "Non-slip rubber tread with flex grooves",
+      "Reflective accents for low-light night running",
+      "Orthopedic antimicrobial insole"
+    ],
+    "specifications": {
+      "Brand": "CloudStep",
+      "Upper": "Engineered Jacquard Knit",
+      "Sole": "High-Density EVA & Anti-skid Rubber",
+      "Closure": "Lace-up",
+      "Sizes Available": "US 7 - 12"
+    }
+  },
+  {
+    "id": 7,
+    "title": "Vintage Polarized UV400 Wayfarer Sunglasses",
+    "slug": "vintage-polarized-sunglasses",
+    "price": 29.99,
+    "originalPrice": 45,
+    "discountPercentage": 33,
+    "category": "Accessories",
+    "rating": 4.7,
+    "reviewCount": 89,
+    "stock": 29,
+    "featured": false,
+    "badge": "Sale",
+    "image": "https://images.unsplash.com/photo-1572635196237-14b3f281503f?auto=format&fit=crop&w=800&q=80",
+    "gallery": [
+      "https://images.unsplash.com/photo-1572635196237-14b3f281503f?auto=format&fit=crop&w=800&q=80"
+    ],
+    "description": "Timeless retro silhouette engineered with 9-layer TAC polarized lenses that eliminate 99.9% of reflective glare while providing certified UV400 defense against harmful UVA/UVB rays.",
+    "features": [
+      "9-Layer HD TAC Polarized Lenses",
+      "100% UV400 protection coating",
+      "Lightweight reinforced acetate frame",
+      "Spring hinges for flexible, comfortable all-day wear",
+      "Includes microfiber cleaning cloth and protective hard case"
+    ],
+    "specifications": {
+      "Frame Material": "Handcrafted Acetate",
+      "Lens Width": "54mm",
+      "Bridge Width": "18mm",
+      "Temple Length": "145mm",
+      "UV Rating": "UV400 Category 3"
+    }
+  },
+  {
+    "id": 8,
+    "title": "HydroPeak Insulated Stainless Steel Water Bottle 32oz",
+    "slug": "hydropeak-insulated-water-bottle",
+    "price": 24.5,
+    "originalPrice": 32,
+    "discountPercentage": 23,
+    "category": "Home & Kitchen",
+    "rating": 4.9,
+    "reviewCount": 420,
+    "stock": 40,
+    "featured": false,
+    "badge": "Popular",
+    "image": "https://images.unsplash.com/photo-1602143407151-7111542de6e8?auto=format&fit=crop&w=800&q=80",
+    "gallery": [
+      "https://images.unsplash.com/photo-1602143407151-7111542de6e8?auto=format&fit=crop&w=800&q=80"
+    ],
+    "description": "Keep beverages ice-cold for 24 hours or steaming hot for 12 hours. Made of food-grade 18/8 stainless steel with a sweat-proof powder coat finish and leakproof straw lid.",
+    "features": [
+      "Double-wall vacuum insulation technology",
+      "18/8 Pro-Grade food-grade stainless steel",
+      "BPA-free, phthalate-free, non-toxic materials",
+      "Leakproof flex straw lid with durable carry loop",
+      "Fits standard cup holders & backpacks"
+    ],
+    "specifications": {
+      "Capacity": "32 oz (950ml)",
+      "Cold Retention": "Up to 24 Hours",
+      "Hot Retention": "Up to 12 Hours",
+      "Dishwasher Safe": "Top Rack Only",
+      "Color": "Matte Forest Green"
+    }
+  },
+  {
+    "id": 9,
+    "title": "UltraFast 65W GaN III 3-Port Wall Charger",
+    "slug": "ultrafast-65w-gan-charger",
+    "price": 34.99,
+    "originalPrice": 49.99,
+    "discountPercentage": 30,
+    "category": "Accessories",
+    "rating": 4.8,
+    "reviewCount": 178,
+    "stock": 25,
+    "featured": false,
+    "badge": "Essential",
+    "image": "https://images.unsplash.com/photo-1583863788434-e58a36330cf0?auto=format&fit=crop&w=800&q=80",
+    "gallery": [
+      "https://images.unsplash.com/photo-1583863788434-e58a36330cf0?auto=format&fit=crop&w=800&q=80"
+    ],
+    "description": "Next-gen Gallium Nitride (GaN) semiconductor fast charger. Powers up your MacBook, iPhone, and AirPods simultaneously in a form factor 50% smaller than standard chargers.",
+    "features": [
+      "65W Max Power Delivery with GaN III tech",
+      "Dual USB-C ports + 1 USB-A port",
+      "Intelligent dynamic power allocation",
+      "Universal fast charging protocols: PD 3.0, QC 4.0+, PPS",
+      "Foldable wall prongs for easy travel portability"
+    ],
+    "specifications": {
+      "Total Wattage": "65W",
+      "Input": "100-240V ~ 50/60Hz 1.5A",
+      "Ports": "2x USB-C + 1x USB-A",
+      "Protection": "Overvoltage, Overheating, Short-circuit",
+      "Weight": "115g"
+    }
+  },
+  {
+    "id": 10,
+    "title": "Urban Denim Trucker Jacket - Stonewash",
+    "slug": "urban-denim-trucker-jacket",
+    "price": 68,
+    "originalPrice": 90,
+    "discountPercentage": 24,
+    "category": "Fashion",
+    "rating": 4.6,
+    "reviewCount": 75,
+    "stock": 14,
+    "featured": false,
+    "badge": "Classic",
+    "image": "https://images.unsplash.com/photo-1576995853123-5a10305d93c0?auto=format&fit=crop&w=800&q=80",
+    "gallery": [
+      "https://images.unsplash.com/photo-1576995853123-5a10305d93c0?auto=format&fit=crop&w=800&q=80"
+    ],
+    "description": "A classic wardrobe staple re-engineered for modern comfort. 100% heavyweight cotton denim with a vintage stonewashed patina, button-flap chest pockets, and waist adjusters.",
+    "features": [
+      "100% Durable Ring-Spun Cotton Denim (12.5 oz)",
+      "Antique brass shank button front closure",
+      "Twin welt hand pockets and twin chest flap pockets",
+      "Side waist tab adjusters for custom tailored fit",
+      "Machine washable with fade-resistant wash"
+    ],
+    "specifications": {
+      "Fabric": "100% Cotton Denim",
+      "Fit": "Regular / Relaxed",
+      "Care": "Cold machine wash with like colors",
+      "Sizes Available": "S, M, L, XL, XXL"
+    }
+  },
+  {
+    "id": 11,
+    "title": "ProErgo Memory Foam Lumbar Support Pillow",
+    "slug": "proergo-memory-foam-pillow",
+    "price": 32,
+    "originalPrice": 42,
+    "discountPercentage": 24,
+    "category": "Home & Kitchen",
+    "rating": 4.7,
+    "reviewCount": 143,
+    "stock": 19,
+    "featured": false,
+    "badge": "Ergonomic",
+    "image": "https://images.unsplash.com/photo-1584100936595-c0654b55a2e2?auto=format&fit=crop&w=800&q=80",
+    "gallery": [
+      "https://images.unsplash.com/photo-1584100936595-c0654b55a2e2?auto=format&fit=crop&w=800&q=80"
+    ],
+    "description": "Relieve lower back pressure and maintain optimal spinal alignment during long workdays. High-density heat-responsive memory foam with 3D mesh breathable machine-washable cover.",
+    "features": [
+      "100% Pure high-density molded memory foam",
+      "Ergonomic contoured spinal groove design",
+      "Adjustable dual elastic straps with sturdy buckles",
+      "Breathable, removable, machine-washable 3D mesh cover",
+      "Suitable for office chairs, car seats, and gaming chairs"
+    ],
+    "specifications": {
+      "Material": "100% High-Density Memory Foam",
+      "Cover": "Air-circulating 3D Mesh",
+      "Dimensions": "36cm x 33cm x 10cm",
+      "Weight": "650g"
+    }
+  },
+  {
+    "id": 12,
+    "title": "CinemaSound Wireless Bluetooth Soundbar",
+    "slug": "cinemasound-wireless-soundbar",
+    "price": 119.99,
+    "originalPrice": 169.99,
+    "discountPercentage": 29,
+    "category": "Electronics",
+    "rating": 4.8,
+    "reviewCount": 98,
+    "stock": 8,
+    "featured": true,
+    "badge": "Limited Stock",
+    "image": "https://images.unsplash.com/photo-1545454675-3531b543be5d?auto=format&fit=crop&w=800&q=80",
+    "gallery": [
+      "https://images.unsplash.com/photo-1545454675-3531b543be5d?auto=format&fit=crop&w=800&q=80"
+    ],
+    "description": "Transform your TV audio into a true cinematic experience. 60W room-filling output with dedicated bass reflex ports, DSP equalizers (Movie, Music, News), and multi-input connectivity.",
+    "features": [
+      "60W Peak Audio Power with 4 full-range drivers",
+      "Deep dual bass reflex tube technology",
+      "Multiple connections: Optical, HDMI ARC, Bluetooth 5.0, AUX, USB",
+      "3 Presets EQ: Cinema, Vocal Clarity, Music",
+      "Includes wireless remote control and wall mount kit"
+    ],
+    "specifications": {
+      "Power Output": "60W RMS",
+      "Channels": "2.0 Channel Stereo",
+      "Inputs": "HDMI ARC, Optical, 3.5mm AUX, USB, Bluetooth",
+      "Dimensions": "80cm x 6cm x 6cm",
+      "Remote Included": "Yes"
+    }
+  }
+]

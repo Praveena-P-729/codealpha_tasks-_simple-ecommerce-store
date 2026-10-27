@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sign In / Register | Aura Store</title>
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🛒</text></svg>">
+  <style>
+    .auth-page {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+    }
+    .auth-wrapper {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 2.5rem 1rem;
+    }
+    .auth-card {
+      background: #ffffff;
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow-xl);
+      max-width: 440px;
+      width: 100%;
+      padding: 2.25rem;
+      position: relative;
+    }
+    .auth-tabs {
+      display: flex;
+      background: #f1f5f9;
+      border-radius: var(--radius-md);
+      padding: 4px;
+      margin-bottom: 1.75rem;
+    }
+    .auth-tab-btn {
+      flex: 1;
+      padding: 0.6rem;
+      font-size: 0.9rem;
+      font-weight: 700;
+      color: var(--text-muted);
+      border-radius: var(--radius-sm);
+      text-align: center;
+      cursor: pointer;
+      transition: var(--transition);
+    }
+    .auth-tab-btn.active {
+      background: #ffffff;
+      color: var(--primary);
+      box-shadow: var(--shadow-sm);
+    }
+    .demo-login-box {
+      background: var(--primary-light);
+      border: 1px dashed var(--primary);
+      border-radius: var(--radius-md);
+      padding: 0.85rem;
+      margin-bottom: 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.5rem;
+    }
+    .password-wrapper {
+      position: relative;
+    }
+    .password-toggle-btn {
+      position: absolute;
+      right: 12px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--text-muted);
+      font-size: 1rem;
+      cursor: pointer;
+      user-select: none;
+    }
+  </style>
+</head>
+<body class="auth-page">
+
+  <!-- Header -->
+  <header class="header">
+    <div class="container header-inner" style="justify-content: space-between;">
+      <a href="index.html" class="brand">
+        <div class="brand-icon">⚡</div>
+        <div class="brand-name">Aura<span>Store</span></div>
+      </a>
+      <a href="index.html" class="nav-link">
+        <span>← Return to Catalog</span>
+      </a>
+    </div>
+  </header>
+
+  <!-- Auth Card Center -->
+  <main class="auth-wrapper">
+    <div class="auth-card">
+      <!-- Title -->
+      <div style="text-align: center; margin-bottom: 1.5rem;">
+        <h1 style="font-size: 1.55rem; font-weight: 800; color: var(--dark); margin-bottom: 0.35rem;" id="authCardTitle">
+          Welcome to AuraStore
+        </h1>
+        <p style="font-size: 0.88rem; color: var(--text-muted);" id="authCardSubtitle">
+          Sign in to access your orders, saved addresses, and express checkout.
+        </p>
+      </div>
+
+      <!-- Quick 1-Click Demo Login Box -->
+      <div class="demo-login-box" id="demoLoginBox">
+        <div>
+          <div style="font-size: 0.82rem; font-weight: 700; color: var(--dark);">Instant Demo Account</div>
+          <div style="font-size: 0.75rem; color: var(--text-muted);">demo@aurastore.com (pre-configured)</div>
+        </div>
+        <button type="button" class="btn btn-primary" style="padding: 0.4rem 0.85rem; font-size: 0.8rem;" onclick="handleDemoLogin()">
+          ⚡ Quick Login
+        </button>
+      </div>
+
+      <!-- Segmented Tab Switcher -->
+      <div class="auth-tabs">
+        <button type="button" class="auth-tab-btn active" id="tabSignIn" onclick="switchAuthTab('signin')">
+          Sign In
+        </button>
+        <button type="button" class="auth-tab-btn" id="tabRegister" onclick="switchAuthTab('register')">
+          Create Account
+        </button>
+      </div>
+
+      <!-- Sign In Form -->
+      <form id="signInForm" onsubmit="handleSignIn(event)">
+        <div class="form-group" style="margin-bottom: 1.15rem;">
+          <label class="form-label" for="loginEmail">Email Address</label>
+          <input type="email" id="loginEmail" class="form-input" placeholder="you@example.com" value="demo@aurastore.com" required autofocus>
+        </div>
+
+        <div class="form-group" style="margin-bottom: 1.15rem;">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.25rem;">
+            <label class="form-label" for="loginPassword" style="margin-bottom: 0;">Password</label>
+            <a href="#" onclick="showToast('For demo testing, use password: password123', 'info'); return false;" style="font-size: 0.78rem; color: var(--primary); font-weight: 600;">Forgot?</a>
+          </div>
+          <div class="password-wrapper">
+            <input type="password" id="loginPassword" class="form-input" placeholder="••••••••" value="password123" required style="padding-right: 2.5rem; width: 100%;">
+            <span class="password-toggle-btn" onclick="togglePasswordVisibility('loginPassword', this)">👁️</span>
+          </div>
+        </div>
+
+        <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 1.5rem;">
+          <input type="checkbox" id="rememberMe" checked style="cursor: pointer;">
+          <label for="rememberMe" style="font-size: 0.82rem; color: var(--text-muted); cursor: pointer;">Stay signed in on this device</label>
+        </div>
+
+        <button type="submit" id="signInSubmitBtn" class="btn btn-primary btn-block btn-lg">
+          Sign In to Account
+        </button>
+      </form>
+
+      <!-- Register Form -->
+      <form id="registerForm" onsubmit="handleRegister(event)" style="display: none;">
+        <div class="form-group" style="margin-bottom: 1.15rem;">
+          <label class="form-label" for="regName">Full Name *</label>
+          <input type="text" id="regName" class="form-input" placeholder="Jordan Smith" required>
+        </div>
+
+        <div class="form-group" style="margin-bottom: 1.15rem;">
+          <label class="form-label" for="regEmail">Email Address *</label>
+          <input type="email" id="regEmail" class="form-input" placeholder="jordan@example.com" required>
+        </div>
+
+        <div class="form-group" style="margin-bottom: 1.5rem;">
+          <label class="form-label" for="regPassword">Create Password (min 6 chars) *</label>
+          <div class="password-wrapper">
+            <input type="password" id="regPassword" class="form-input" placeholder="••••••••" minlength="6" required style="padding-right: 2.5rem; width: 100%;">
+            <span class="password-toggle-btn" onclick="togglePasswordVisibility('regPassword', this)">👁️</span>
+          </div>
+        </div>
+
+        <button type="submit" id="registerSubmitBtn" class="btn btn-primary btn-block btn-lg">
+          Create Free Account
+        </button>
+      </form>
+
+      <!-- Already Logged In Notice -->
+      <div id="alreadyLoggedInBox" style="display: none; text-align: center; padding: 1rem 0;">
+        <p style="font-size: 0.95rem; color: var(--text-main); margin-bottom: 1rem;">
+          You are currently signed in as <strong id="loggedInUserName">User</strong>.
+        </p>
+        <div style="display: flex; gap: 0.75rem;">
+          <button type="button" class="btn btn-secondary" style="flex: 1;" onclick="auth.logout()">Sign Out</button>
+          <a href="index.html" class="btn btn-primary" style="flex: 1;">Go to Store</a>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Toast Notification Container -->
+  <div class="toast-container" id="toastContainer"></div>
+
+  <!-- Footer -->
+  <footer class="footer" style="padding: 1.5rem 0;">
+    <div class="container" style="text-align: center; font-size: 0.8rem; color: #64748b;">
+      &copy; 2026 AuraStore Inc. All rights reserved.
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="js/api.js"></script>
+  <script src="js/cart.js"></script>
+  <script src="js/auth.js"></script>
+
+  <script>
+    // Tab switching
+    function switchAuthTab(tab) {
+      const isSignIn = tab === 'signin';
+      document.getElementById('tabSignIn').classList.toggle('active', isSignIn);
+      document.getElementById('tabRegister').classList.toggle('active', !isSignIn);
+
+      document.getElementById('signInForm').style.display = isSignIn ? 'block' : 'none';
+      document.getElementById('registerForm').style.display = isSignIn ? 'none' : 'block';
+      document.getElementById('demoLoginBox').style.display = isSignIn ? 'flex' : 'none';
+
+      document.getElementById('authCardTitle').textContent = isSignIn ? 'Welcome to AuraStore' : 'Create an Account';
+      document.getElementById('authCardSubtitle').textContent = isSignIn 
+        ? 'Sign in to access your orders, saved addresses, and express checkout.' 
+        : 'Join AuraStore for fast checkout, exclusive drops, and easy tracking.';
+    }
+
+    // Toggle password mask
+    function togglePasswordVisibility(inputId, el) {
+      const input = document.getElementById(inputId);
+      if (input.type === 'password') {
+        input.type = 'text';
+        el.textContent = '🔒';
+      } else {
+        input.type = 'password';
+        el.textContent = '👁️';
+      }
+    }
+
+    // Get redirect URL
+    function getRedirectUrl() {
+      const params = new URLSearchParams(window.location.search);
+      return params.get('redirect') || 'index.html';
+    }
+
+    // Sign In Action
+    async function handleSignIn(e) {
+      e.preventDefault();
+      const email = document.getElementById('loginEmail').value.trim();
+      const password = document.getElementById('loginPassword').value;
+      const btn = document.getElementById('signInSubmitBtn');
+
+      btn.disabled = true;
+      btn.textContent = 'Signing in...';
+
+      try {
+        const user = await auth.login(email, password);
+        showToast(`Welcome back, ${user.name}!`, 'success');
+        setTimeout(() => {
+          window.location.href = getRedirectUrl();
+        }, 600);
+      } catch (err) {
+        showToast(err.message, 'error');
+        btn.disabled = false;
+        btn.textContent = 'Sign In to Account';
+      }
+    }
+
+    // Demo Login Helper
+    async function handleDemoLogin() {
+      document.getElementById('loginEmail').value = 'demo@aurastore.com';
+      document.getElementById('loginPassword').value = 'password123';
+      const btn = document.getElementById('signInSubmitBtn');
+      btn.disabled = true;
+      btn.textContent = 'Signing in...';
+
+      try {
+        const user = await auth.login('demo@aurastore.com', 'password123');
+        showToast(`Welcome back, ${user.name}!`, 'success');
+        setTimeout(() => {
+          window.location.href = getRedirectUrl();
+        }, 500);
+      } catch (err) {
+        showToast(err.message, 'error');
+        btn.disabled = false;
+        btn.textContent = 'Sign In to Account';
+      }
+    }
+
+    // Register Action
+    async function handleRegister(e) {
+      e.preventDefault();
+      const name = document.getElementById('regName').value.trim();
+      const email = document.getElementById('regEmail').value.trim();
+      const password = document.getElementById('regPassword').value;
+      const btn = document.getElementById('registerSubmitBtn');
+
+      btn.disabled = true;
+      btn.textContent = 'Creating account...';
+
+      try {
+        const user = await auth.register({ name, email, password });
+        showToast(`Account created! Welcome, ${user.name}!`, 'success');
+        setTimeout(() => {
+          window.location.href = getRedirectUrl();
+        }, 600);
+      } catch (err) {
+        showToast(err.message, 'error');
+        btn.disabled = false;
+        btn.textContent = 'Create Free Account';
+      }
+    }
+
+    // Check if user is already logged in
+    document.addEventListener('DOMContentLoaded', () => {
+      if (auth.isLoggedIn()) {
+        const user = auth.getUser();
+        document.getElementById('signInForm').style.display = 'none';
+        document.getElementById('registerForm').style.display = 'none';
+        document.getElementById('demoLoginBox').style.display = 'none';
+        document.querySelector('.auth-tabs').style.display = 'none';
+        document.getElementById('alreadyLoggedInBox').style.display = 'block';
+        document.getElementById('loggedInUserName').textContent = user.name;
+        document.getElementById('authCardTitle').textContent = 'Account Status';
+        document.getElementById('authCardSubtitle').textContent = 'You are already logged into AuraStore.';
+      }
+    });
+  </script>
+</body>
+</html>

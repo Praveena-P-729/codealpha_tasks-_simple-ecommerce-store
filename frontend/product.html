@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Product Details | Aura Store</title>
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🛒</text></svg>">
+  <style>
+    /* Dedicated Product Page Specific Styling */
+    .breadcrumbs {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      padding: 1.25rem 0;
+    }
+    .breadcrumbs a:hover {
+      color: var(--primary);
+    }
+    .specs-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 1rem;
+    }
+    .specs-table tr {
+      border-bottom: 1px solid var(--border);
+    }
+    .specs-table td {
+      padding: 0.75rem 0;
+      font-size: 0.9rem;
+    }
+    .specs-table td:first-child {
+      font-weight: 600;
+      color: var(--dark);
+      width: 35%;
+    }
+    .specs-table td:last-child {
+      color: var(--text-muted);
+    }
+    .reviews-card {
+      background: #ffffff;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 1.75rem;
+      margin-top: 2rem;
+    }
+    .review-item {
+      padding: 1.25rem 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .review-item:last-child {
+      border-bottom: none;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Announcement Bar -->
+  <div style="background-color: #1e1b4b; color: #cbd5e1; font-size: 0.8rem; text-align: center; padding: 0.45rem 1rem;">
+    🚚 Free standard shipping on orders over $50 | Use code <strong style="color: #38bdf8;">SAVE10</strong> for 10% off!
+  </div>
+
+  <!-- Header -->
+  <header class="header">
+    <div class="container header-inner">
+      <a href="index.html" class="brand">
+        <div class="brand-icon">⚡</div>
+        <div class="brand-name">Aura<span>Store</span></div>
+      </a>
+
+      <div style="flex: 1; max-width: 400px; text-align: center;">
+        <span style="font-size: 0.88rem; font-weight: 600; color: var(--text-muted);" id="headerProductTitle">Product Overview</span>
+      </div>
+
+      <nav class="nav-actions">
+        <a href="index.html" class="nav-link">Catalog</a>
+        <a href="track-order.html" class="nav-link">Track Order</a>
+        <div class="auth-nav-slot">
+          <a href="login.html" class="nav-link"><span>👤</span><span>Sign In</span></a>
+        </div>
+        <button class="cart-btn cart-toggle-btn" aria-label="Shopping Cart">
+          <span>🛒</span>
+          <span>Cart</span>
+          <span class="cart-badge" style="display: none;">0</span>
+        </button>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Product Details Container -->
+  <main class="container" style="padding-bottom: 5rem;">
+    <!-- Breadcrumbs -->
+    <nav class="breadcrumbs" id="breadcrumbsNav">
+      <a href="index.html">Home</a>
+      <span>/</span>
+      <span id="breadcrumbCategory">Category</span>
+      <span>/</span>
+      <span id="breadcrumbTitle" style="color: var(--dark); font-weight: 600;">Product</span>
+    </nav>
+
+    <!-- Product Hero Section -->
+    <div id="productContainer">
+      <div style="text-align: center; padding: 4rem 1rem; color: var(--text-muted);">
+        <p>Loading product details...</p>
+      </div>
+    </div>
+
+    <!-- Related Products Section -->
+    <section style="margin-top: 4rem;">
+      <h3 style="font-size: 1.5rem; font-weight: 800; margin-bottom: 1.5rem; color: var(--dark);">
+        You Might Also Like
+      </h3>
+      <div class="products-grid" id="relatedProductsGrid">
+        <!-- Rendered dynamically -->
+      </div>
+    </section>
+  </main>
+
+  <!-- Slide-Out Shopping Cart Drawer -->
+  <div class="cart-drawer-overlay" id="cartOverlay"></div>
+  <aside class="cart-drawer" id="cartDrawer" aria-label="Shopping Cart Drawer">
+    <div class="cart-header">
+      <div class="cart-title">
+        <span>🛒</span>
+        <span>Your Shopping Cart</span>
+      </div>
+      <button class="cart-close-btn" id="cartCloseBtn" aria-label="Close cart">✕</button>
+    </div>
+
+    <div style="padding: 0.85rem 1.5rem; background-color: #f8fafc; border-bottom: 1px solid var(--border);">
+      <div class="shipping-status-text" id="freeShippingText">Add $50.00 for FREE delivery!</div>
+      <div class="free-shipping-progress">
+        <div class="free-shipping-bar" id="freeShippingBar"></div>
+      </div>
+    </div>
+
+    <div class="cart-items-list" id="cartItemsContainer"></div>
+
+    <div class="cart-footer">
+      <div class="cart-coupon-box">
+        <input type="text" id="cartCouponInput" class="cart-coupon-input" placeholder="Promo code (e.g. SAVE10)">
+        <button type="button" id="applyCouponBtn" class="btn btn-secondary" style="height: 38px; padding: 0 1rem;">Apply</button>
+      </div>
+
+      <div class="cart-summary-line">
+        <span>Subtotal</span>
+        <span id="cartSubtotal">$0.00</span>
+      </div>
+      <div class="cart-summary-line" id="cartDiscountRow" style="display: none; color: var(--success);">
+        <span>Discount</span>
+        <span id="cartDiscount">-$0.00</span>
+      </div>
+      <div class="cart-summary-line">
+        <span>Estimated Shipping</span>
+        <span id="cartShipping">Calculated</span>
+      </div>
+      <div class="cart-summary-line">
+        <span>Estimated Tax (8%)</span>
+        <span id="cartTax">$0.00</span>
+      </div>
+      <div class="cart-summary-line total">
+        <span>Estimated Total</span>
+        <span id="cartTotal">$0.00</span>
+      </div>
+
+      <div style="display: flex; gap: 0.75rem; margin-top: 1.25rem;">
+        <button type="button" id="cartCheckoutBtn" class="btn btn-primary btn-block btn-lg">
+          <span>Proceed to Checkout</span>
+          <span>➔</span>
+        </button>
+      </div>
+    </div>
+  </aside>
+
+  <!-- Toast Notification Container -->
+  <div class="toast-container" id="toastContainer"></div>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-bottom">
+        &copy; 2026 AuraStore Inc. All rights reserved.
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="js/api.js"></script>
+  <script src="js/cart.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/product.js"></script>
+</body>
+</html>

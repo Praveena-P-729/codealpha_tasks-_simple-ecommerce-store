@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Aura Store | Premium Electronics, Fashion & Home</title>
+  <meta name="description" content="Shop premium electronics, contemporary fashion, home essentials, and lifestyle accessories with fast delivery.">
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🛒</text></svg>">
+</head>
+<body>
+
+  <!-- Top Announcement Bar -->
+  <div style="background-color: #1e1b4b; color: #cbd5e1; font-size: 0.8rem; text-align: center; padding: 0.45rem 1rem; font-weight: 500;">
+    🚚 Free standard shipping on orders over $50 | Use code <strong style="color: #38bdf8;">SAVE10</strong> for 10% off your order!
+  </div>
+
+  <!-- Header & Navigation -->
+  <header class="header">
+    <div class="container header-inner">
+      <a href="index.html" class="brand">
+        <div class="brand-icon">⚡</div>
+        <div class="brand-name">Aura<span>Store</span></div>
+      </a>
+
+      <!-- Search Bar -->
+      <form class="search-form" id="searchForm" onsubmit="return false;">
+        <div class="search-input-wrapper">
+          <span class="search-icon">🔍</span>
+          <input type="text" id="searchInput" class="search-input" placeholder="Search headphones, keyboards, backpacks..." autocomplete="off">
+          <span class="search-clear" id="searchClear" title="Clear search">✕</span>
+        </div>
+      </form>
+
+      <!-- Nav Actions -->
+      <nav class="nav-actions">
+        <a href="index.html" class="nav-link active">Home</a>
+        <a href="track-order.html" class="nav-link">Track Order</a>
+        <div class="auth-nav-slot">
+          <a href="login.html" class="nav-link"><span>👤</span><span>Sign In</span></a>
+        </div>
+        <button class="cart-btn cart-toggle-btn" aria-label="Shopping Cart">
+          <span>🛒</span>
+          <span>Cart</span>
+          <span class="cart-badge" id="cartCountBadge" style="display: none;">0</span>
+        </button>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero-section">
+    <div class="container">
+      <div class="hero-content">
+        <div class="hero-pill">✨ Featured Collection 2026</div>
+        <h1 class="hero-title">Elevate Your Everyday Essentials</h1>
+        <p class="hero-subtitle">
+          Curated collection of next-generation gadgets, refined apparel, and artisanal lifestyle essentials crafted for modern living.
+        </p>
+        <div class="hero-highlights">
+          <div class="hero-highlight-item">
+            <span class="hero-highlight-icon">⚡</span>
+            <span>Express 2-Day Delivery</span>
+          </div>
+          <div class="hero-highlight-item">
+            <span class="hero-highlight-icon">🛡️</span>
+            <span>30-Day Money Back Guarantee</span>
+          </div>
+          <div class="hero-highlight-item">
+            <span class="hero-highlight-icon">⭐</span>
+            <span>4.9 / 5 Customer Rating</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Main Store Catalog Container -->
+  <main class="container">
+    <!-- Filter & Sort Bar -->
+    <section class="filter-bar">
+      <div class="filter-row">
+        <!-- Category Pills (Populated dynamically) -->
+        <div class="category-pills" id="categoryPills">
+          <button class="category-pill active" data-category="all">
+            All Products <span class="pill-count" id="countAll">12</span>
+          </button>
+        </div>
+
+        <!-- Sorting Selector -->
+        <div class="sort-select-wrapper">
+          <label for="sortSelect" class="sort-label">Sort by:</label>
+          <select id="sortSelect" class="sort-select">
+            <option value="newest">Featured & Newest</option>
+            <option value="price-asc">Price: Low to High</option>
+            <option value="price-desc">Price: High to Low</option>
+            <option value="rating">Highest Rated</option>
+            <option value="name-asc">Alphabetical (A - Z)</option>
+          </select>
+        </div>
+      </div>
+    </section>
+
+    <!-- Product Catalog Grid -->
+    <section class="products-section">
+      <div class="section-header">
+        <div>
+          <h2 class="section-title" id="catalogTitle">Explore Catalog</h2>
+          <p class="section-results" id="catalogResults">Loading products...</p>
+        </div>
+      </div>
+
+      <!-- Products Grid -->
+      <div class="products-grid" id="productsGrid">
+        <!-- Rendered dynamically by app.js -->
+      </div>
+
+      <!-- Empty State Handler -->
+      <div class="empty-state" id="emptyState" style="display: none;">
+        <div class="empty-state-icon">🔎</div>
+        <h3 class="empty-state-title">No products found</h3>
+        <p class="empty-state-text">We couldn't find any products matching your search criteria. Try using different keywords or resetting filters.</p>
+        <button class="btn btn-primary" id="resetFiltersBtn">Reset All Filters</button>
+      </div>
+    </section>
+  </main>
+
+  <!-- Slide-Out Shopping Cart Drawer -->
+  <div class="cart-drawer-overlay" id="cartOverlay"></div>
+  <aside class="cart-drawer" id="cartDrawer" aria-label="Shopping Cart Drawer">
+    <div class="cart-header">
+      <div class="cart-title">
+        <span>🛒</span>
+        <span>Your Shopping Cart</span>
+      </div>
+      <button class="cart-close-btn" id="cartCloseBtn" aria-label="Close cart">✕</button>
+    </div>
+
+    <!-- Free Shipping Progress -->
+    <div style="padding: 0.85rem 1.5rem; background-color: #f8fafc; border-bottom: 1px solid var(--border);">
+      <div class="shipping-status-text" id="freeShippingText">Add $50.00 for FREE delivery!</div>
+      <div class="free-shipping-progress">
+        <div class="free-shipping-bar" id="freeShippingBar"></div>
+      </div>
+    </div>
+
+    <!-- Cart Items Scroll Area -->
+    <div class="cart-items-list" id="cartItemsContainer">
+      <!-- Injected by cart.js -->
+    </div>
+
+    <!-- Cart Footer & Checkout Summary -->
+    <div class="cart-footer">
+      <div class="cart-coupon-box">
+        <input type="text" id="cartCouponInput" class="cart-coupon-input" placeholder="Promo code (e.g. SAVE10)">
+        <button type="button" id="applyCouponBtn" class="btn btn-secondary" style="height: 38px; padding: 0 1rem;">Apply</button>
+      </div>
+
+      <div class="cart-summary-line">
+        <span>Subtotal</span>
+        <span id="cartSubtotal">$0.00</span>
+      </div>
+      <div class="cart-summary-line" id="cartDiscountRow" style="display: none; color: var(--success);">
+        <span>Discount</span>
+        <span id="cartDiscount">-$0.00</span>
+      </div>
+      <div class="cart-summary-line">
+        <span>Estimated Shipping</span>
+        <span id="cartShipping">Calculated</span>
+      </div>
+      <div class="cart-summary-line">
+        <span>Estimated Tax (8%)</span>
+        <span id="cartTax">$0.00</span>
+      </div>
+      <div class="cart-summary-line total">
+        <span>Estimated Total</span>
+        <span id="cartTotal">$0.00</span>
+      </div>
+
+      <div style="display: flex; gap: 0.75rem; margin-top: 1.25rem;">
+        <button type="button" id="cartCheckoutBtn" class="btn btn-primary btn-block btn-lg">
+          <span>Proceed to Checkout</span>
+          <span>➔</span>
+        </button>
+      </div>
+      <p style="text-align: center; font-size: 0.75rem; color: var(--text-subtle); margin-top: 0.75rem;">
+        🔒 Secure 256-Bit SSL Encrypted Checkout
+      </p>
+    </div>
+  </aside>
+
+  <!-- Quick View Product Modal -->
+  <div class="modal-overlay" id="quickViewModal">
+    <div class="modal-container">
+      <button class="modal-close-btn" id="modalCloseBtn">✕</button>
+      <div id="quickViewContent">
+        <!-- Rendered dynamically -->
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast Notification Container -->
+  <div class="toast-container" id="toastContainer"></div>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-features-bar">
+        <div class="footer-feature-item">
+          <div class="footer-feature-icon">🚀</div>
+          <div>
+            <div class="footer-feature-title">Free Shipping</div>
+            <div class="footer-feature-desc">On all orders over $50.00</div>
+          </div>
+        </div>
+        <div class="footer-feature-item">
+          <div class="footer-feature-icon">🔄</div>
+          <div>
+            <div class="footer-feature-title">30-Day Free Returns</div>
+            <div class="footer-feature-desc">Hassle-free return policy</div>
+          </div>
+        </div>
+        <div class="footer-feature-item">
+          <div class="footer-feature-icon">🛡️</div>
+          <div>
+            <div class="footer-feature-title">Secure Payments</div>
+            <div class="footer-feature-desc">Encrypted checkout protection</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-grid">
+        <div>
+          <div class="footer-brand-title">AuraStore</div>
+          <p class="footer-text">
+            Crafting premium modern lifestyles with high-performance electronics, sustainable fashion, and thoughtfully designed home goods.
+          </p>
+        </div>
+
+        <div>
+          <h4 class="footer-heading">Shop Categories</h4>
+          <ul class="footer-links">
+            <li><a href="#" onclick="app.setCategory('Electronics'); return false;">Electronics</a></li>
+            <li><a href="#" onclick="app.setCategory('Fashion'); return false;">Fashion</a></li>
+            <li><a href="#" onclick="app.setCategory('Home & Kitchen'); return false;">Home & Kitchen</a></li>
+            <li><a href="#" onclick="app.setCategory('Accessories'); return false;">Accessories</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="footer-heading">Customer Care</h4>
+          <ul class="footer-links">
+            <li><a href="track-order.html">Track Your Order</a></li>
+            <li><a href="checkout.html">Checkout</a></li>
+            <li><a href="#" onclick="showToast('Support available 24/7 at support@aurastore.com', 'info'); return false;">Help & FAQ</a></li>
+            <li><a href="#" onclick="showToast('Returns accepted within 30 days of purchase.', 'info'); return false;">Returns & Exchanges</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="footer-heading">Special Offer</h4>
+          <p class="footer-text" style="font-size: 0.85rem;">
+            Subscribe to receive exclusive launches, limited drops, and member-only discounts.
+          </p>
+          <div style="display: flex; gap: 0.5rem;">
+            <input type="email" placeholder="Enter your email" style="height: 38px; border-radius: 6px; padding: 0 10px; border: 1px solid #334155; background: #1e293b; color: #fff; width: 100%;">
+            <button class="btn btn-primary" style="padding: 0 1rem; font-size: 0.85rem;" onclick="showToast('Thank you for subscribing!', 'success')">Join</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        &copy; 2026 AuraStore Inc. All rights reserved. Built with HTML, CSS, JavaScript, and Express.js.
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="js/api.js"></script>
+  <script src="js/cart.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>

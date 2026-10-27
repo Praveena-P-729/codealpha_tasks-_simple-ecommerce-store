@@ -1,0 +1,17 @@
+{
+  "name": "simple-ecommerce-store",
+  "version": "1.0.0",
+  "description": "A full-featured simple e-commerce store with HTML, CSS, JavaScript frontend and Express.js backend",
+  "main": "backend/server.js",
+  "scripts": {
+    "start": "node backend/server.js",
+    "dev": "node --watch backend/server.js"
+  },
+  "keywords": ["ecommerce", "shopping-cart", "express", "javascript", "html", "css"],
+  "author": "Antigravity",
+  "license": "MIT",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.21.2"
+  }
+}

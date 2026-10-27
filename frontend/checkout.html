@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Secure Checkout | Aura Store</title>
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🛒</text></svg>">
+  <style>
+    .order-summary-item {
+      display: flex;
+      gap: 0.85rem;
+      align-items: center;
+      margin-bottom: 0.85rem;
+      padding-bottom: 0.85rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .order-summary-item:last-child {
+      border-bottom: none;
+    }
+    .summary-item-img {
+      width: 52px;
+      height: 52px;
+      border-radius: var(--radius-sm);
+      object-fit: cover;
+      background: #f1f5f9;
+      border: 1px solid var(--border);
+    }
+    .invoice-container {
+      background: #ffffff;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 2.5rem;
+      box-shadow: var(--shadow-lg);
+      max-width: 720px;
+      margin: 2rem auto;
+    }
+    @media print {
+      body * {
+        visibility: hidden;
+      }
+      #confirmationView, #confirmationView * {
+        visibility: visible;
+      }
+      #confirmationView {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+      }
+      .no-print {
+        display: none !important;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <header class="header">
+    <div class="container header-inner">
+      <a href="index.html" class="brand">
+        <div class="brand-icon">⚡</div>
+        <div class="brand-name">Aura<span>Store</span></div>
+      </a>
+
+      <div style="display: flex; align-items: center; gap: 0.5rem; font-size: 0.9rem; font-weight: 600; color: var(--success);">
+        <span>🔒</span>
+        <span>256-Bit SSL Encrypted Checkout</span>
+      </div>
+
+      <nav class="nav-actions">
+        <div class="auth-nav-slot">
+          <a href="login.html?redirect=checkout.html" class="nav-link"><span>👤</span><span>Sign In</span></a>
+        </div>
+        <a href="index.html" class="nav-link">Back to Catalog</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Checkout Main View -->
+  <main class="container">
+    <div id="checkoutView">
+      <div class="checkout-layout">
+        <!-- Left: Checkout Forms -->
+        <div>
+          <!-- Step 1: Customer & Shipping Information -->
+          <div class="checkout-card">
+            <h2 class="checkout-card-title">
+              <span class="step-num">1</span>
+              <span>Shipping Information</span>
+            </h2>
+
+            <form id="shippingForm" onsubmit="return false;">
+              <div class="form-grid">
+                <div class="form-group">
+                  <label class="form-label" for="custFullName">Full Name *</label>
+                  <input type="text" id="custFullName" class="form-input" placeholder="e.g. Jordan Smith" required>
+                </div>
+
+                <div class="form-group">
+                  <label class="form-label" for="custEmail">Email Address *</label>
+                  <input type="email" id="custEmail" class="form-input" placeholder="jordan@example.com" required>
+                </div>
+
+                <div class="form-group">
+                  <label class="form-label" for="custPhone">Phone Number *</label>
+                  <input type="tel" id="custPhone" class="form-input" placeholder="+1 (555) 019-2834" required>
+                </div>
+
+                <div class="form-group">
+                  <label class="form-label" for="custCountry">Country / Region *</label>
+                  <select id="custCountry" class="form-input" required>
+                    <option value="United States">United States</option>
+                    <option value="Canada">Canada</option>
+                    <option value="United Kingdom">United Kingdom</option>
+                    <option value="Australia">Australia</option>
+                    <option value="Germany">Germany</option>
+                    <option value="India">India</option>
+                  </select>
+                </div>
+
+                <div class="form-group full">
+                  <label class="form-label" for="custAddress">Street Address *</label>
+                  <input type="text" id="custAddress" class="form-input" placeholder="1234 Innovation Blvd, Suite 200" required>
+                </div>
+
+                <div class="form-group">
+                  <label class="form-label" for="custCity">City *</label>
+                  <input type="text" id="custCity" class="form-input" placeholder="San Francisco" required>
+                </div>
+
+                <div class="form-group">
+                  <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem;">
+                    <div>
+                      <label class="form-label" for="custState">State / Prov *</label>
+                      <input type="text" id="custState" class="form-input" placeholder="CA" required>
+                    </div>
+                    <div>
+                      <label class="form-label" for="custZip">ZIP / Postal *</label>
+                      <input type="text" id="custZip" class="form-input" placeholder="94107" required>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </form>
+          </div>
+
+          <!-- Step 2: Shipping Method -->
+          <div class="checkout-card">
+            <h2 class="checkout-card-title">
+              <span class="step-num">2</span>
+              <span>Delivery Method</span>
+            </h2>
+
+            <div class="payment-options">
+              <label class="payment-radio-label">
+                <input type="radio" name="shippingMethod" value="standard" checked onchange="checkout.updateShippingMethod('standard')">
+                <div class="payment-radio-content" style="flex: 1;">
+                  <div style="display: flex; justify-content: space-between; font-weight: 600;">
+                    <span>Standard Ground Shipping</span>
+                    <span id="standardShippingPriceBadge">Calculated</span>
+                  </div>
+                  <div style="font-size: 0.8rem; color: var(--text-muted);">Estimated 3-5 business days. Free on orders $50+.</div>
+                </div>
+              </label>
+
+              <label class="payment-radio-label">
+                <input type="radio" name="shippingMethod" value="express" onchange="checkout.updateShippingMethod('express')">
+                <div class="payment-radio-content" style="flex: 1;">
+                  <div style="display: flex; justify-content: space-between; font-weight: 600;">
+                    <span>Express Air Priority</span>
+                    <span>$14.99</span>
+                  </div>
+                  <div style="font-size: 0.8rem; color: var(--text-muted);">Guaranteed 1-2 business days with priority dispatch.</div>
+                </div>
+              </label>
+            </div>
+          </div>
+
+          <!-- Step 3: Payment Details -->
+          <div class="checkout-card">
+            <h2 class="checkout-card-title">
+              <span class="step-num">3</span>
+              <span>Payment Details</span>
+            </h2>
+
+            <div class="payment-options" style="margin-bottom: 1.25rem;">
+              <label class="payment-radio-label">
+                <input type="radio" name="paymentType" value="card" checked onchange="checkout.togglePaymentType('card')">
+                <div class="payment-radio-content" style="flex: 1; display: flex; justify-content: space-between; align-items: center;">
+                  <span style="font-weight: 600;">Credit / Debit Card</span>
+                  <span>💳 🔒</span>
+                </div>
+              </label>
+
+              <label class="payment-radio-label">
+                <input type="radio" name="paymentType" value="cod" onchange="checkout.togglePaymentType('cod')">
+                <div class="payment-radio-content" style="flex: 1; display: flex; justify-content: space-between; align-items: center;">
+                  <span style="font-weight: 600;">Cash on Delivery (Pay upon arrival)</span>
+                  <span>💵</span>
+                </div>
+              </label>
+            </div>
+
+            <!-- Card Inputs Form -->
+            <div id="cardFieldsContainer" class="form-grid">
+              <div class="form-group full">
+                <label class="form-label" for="cardNumber">Card Number</label>
+                <input type="text" id="cardNumber" class="form-input" placeholder="4242 •••• •••• 4242" maxlength="19" value="4242 8888 7777 4242">
+              </div>
+
+              <div class="form-group">
+                <label class="form-label" for="cardExpiry">Expiration Date</label>
+                <input type="text" id="cardExpiry" class="form-input" placeholder="MM/YY" maxlength="5" value="12/28">
+              </div>
+
+              <div class="form-group">
+                <label class="form-label" for="cardCvv">Security Code (CVV)</label>
+                <input type="password" id="cardCvv" class="form-input" placeholder="123" maxlength="4" value="888">
+              </div>
+
+              <div class="form-group full">
+                <label class="form-label" for="cardHolder">Name on Card</label>
+                <input type="text" id="cardHolder" class="form-input" placeholder="Cardholder Full Name" value="Alex Mercer">
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right: Order Summary Sidebar -->
+        <div>
+          <div class="checkout-card" style="position: sticky; top: 90px;">
+            <h2 class="checkout-card-title" style="margin-bottom: 1rem;">
+              <span>Order Summary</span>
+              <span id="summaryItemCount" style="font-size: 0.85rem; font-weight: 600; color: var(--text-muted);">(0 items)</span>
+            </h2>
+
+            <div id="checkoutItemsList" style="max-height: 280px; overflow-y: auto; margin-bottom: 1.25rem;">
+              <!-- Items injected by checkout.js -->
+            </div>
+
+            <!-- Promo Code -->
+            <div class="cart-coupon-box" style="margin-bottom: 1.25rem;">
+              <input type="text" id="checkoutCouponInput" class="cart-coupon-input" placeholder="Promo code (e.g. SAVE10)">
+              <button type="button" id="checkoutApplyCouponBtn" class="btn btn-secondary" style="height: 38px; padding: 0 1rem;">Apply</button>
+            </div>
+
+            <!-- Calculation Lines -->
+            <div class="cart-summary-line">
+              <span>Items Subtotal</span>
+              <span id="summarySubtotal">$0.00</span>
+            </div>
+
+            <div class="cart-summary-line" id="summaryDiscountRow" style="display: none; color: var(--success);">
+              <span>Coupon Discount</span>
+              <span id="summaryDiscount">-$0.00</span>
+            </div>
+
+            <div class="cart-summary-line">
+              <span>Shipping</span>
+              <span id="summaryShipping">$0.00</span>
+            </div>
+
+            <div class="cart-summary-line">
+              <span>Estimated Tax (8%)</span>
+              <span id="summaryTax">$0.00</span>
+            </div>
+
+            <div class="cart-summary-line total">
+              <span>Total Due</span>
+              <span id="summaryTotal">$0.00</span>
+            </div>
+
+            <!-- Place Order Action -->
+            <div style="margin-top: 1.5rem;">
+              <button type="button" id="placeOrderBtn" class="btn btn-primary btn-block btn-lg" onclick="checkout.processOrder()">
+                <span>🔒 Place Order Now</span>
+              </button>
+            </div>
+
+            <p style="text-align: center; font-size: 0.75rem; color: var(--text-subtle); margin-top: 1rem; line-height: 1.4;">
+              By placing your order, you agree to AuraStore's Terms of Use and Privacy Policy. All payments are processed securely.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Confirmation / Invoice View (Shown after successful order) -->
+    <div id="confirmationView" style="display: none;">
+      <div class="invoice-container">
+        <div style="text-align: center; margin-bottom: 2rem;">
+          <div style="width: 64px; height: 64px; background: var(--success-light); color: var(--success); font-size: 2rem; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; margin-bottom: 1rem;">
+            ✓
+          </div>
+          <h1 style="font-size: 1.85rem; font-weight: 800; color: var(--dark); margin-bottom: 0.5rem;">Thank You for Your Order!</h1>
+          <p style="color: var(--text-muted); font-size: 0.95rem;">
+            We've received your order and are getting it ready for dispatch. A confirmation email has been sent.
+          </p>
+        </div>
+
+        <div style="background: #f8fafc; border-radius: 12px; border: 1px solid var(--border); padding: 1.25rem; display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 1rem; margin-bottom: 2rem;">
+          <div>
+            <span style="font-size: 0.75rem; text-transform: uppercase; color: var(--text-subtle); font-weight: 700;">Order ID</span>
+            <div id="confOrderId" style="font-weight: 800; color: var(--primary); font-size: 1.05rem;">-</div>
+          </div>
+          <div>
+            <span style="font-size: 0.75rem; text-transform: uppercase; color: var(--text-subtle); font-weight: 700;">Order Date</span>
+            <div id="confOrderDate" style="font-weight: 600; color: var(--dark);">-</div>
+          </div>
+          <div>
+            <span style="font-size: 0.75rem; text-transform: uppercase; color: var(--text-subtle); font-weight: 700;">Status</span>
+            <div id="confOrderStatus" style="font-weight: 700; color: var(--success);">-</div>
+          </div>
+          <div>
+            <span style="font-size: 0.75rem; text-transform: uppercase; color: var(--text-subtle); font-weight: 700;">Estimated Delivery</span>
+            <div id="confOrderDelivery" style="font-weight: 600; color: var(--dark);">-</div>
+          </div>
+        </div>
+
+        <!-- Shipping & Payment Breakdown -->
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-bottom: 2rem;">
+          <div>
+            <h4 style="font-size: 0.95rem; font-weight: 700; color: var(--dark); margin-bottom: 0.5rem;">Shipping Address</h4>
+            <div id="confShippingAddress" style="font-size: 0.88rem; color: var(--text-muted); line-height: 1.5;"></div>
+          </div>
+          <div>
+            <h4 style="font-size: 0.95rem; font-weight: 700; color: var(--dark); margin-bottom: 0.5rem;">Payment Information</h4>
+            <div id="confPaymentInfo" style="font-size: 0.88rem; color: var(--text-muted); line-height: 1.5;"></div>
+          </div>
+        </div>
+
+        <!-- Ordered Items Table -->
+        <h4 style="font-size: 1rem; font-weight: 700; color: var(--dark); margin-bottom: 1rem;">Items Ordered</h4>
+        <div id="confItemsList" style="border-top: 1px solid var(--border); margin-bottom: 1.5rem;">
+          <!-- Items injected -->
+        </div>
+
+        <!-- Receipt Pricing Breakdown -->
+        <div style="max-width: 300px; margin-left: auto; margin-bottom: 2rem;">
+          <div class="cart-summary-line">
+            <span>Subtotal</span>
+            <span id="confSubtotal">$0.00</span>
+          </div>
+          <div class="cart-summary-line" id="confDiscountRow" style="display: none; color: var(--success);">
+            <span>Discount</span>
+            <span id="confDiscount">-$0.00</span>
+          </div>
+          <div class="cart-summary-line">
+            <span>Shipping</span>
+            <span id="confShipping">$0.00</span>
+          </div>
+          <div class="cart-summary-line">
+            <span>Tax (8%)</span>
+            <span id="confTax">$0.00</span>
+          </div>
+          <div class="cart-summary-line total">
+            <span>Total Paid</span>
+            <span id="confTotal" style="color: var(--primary);">$0.00</span>
+          </div>
+        </div>
+
+        <!-- Invoice Action Buttons -->
+        <div class="no-print" style="display: flex; gap: 1rem; flex-wrap: wrap; justify-content: center; border-top: 1px solid var(--border); padding-top: 1.5rem;">
+          <button class="btn btn-outline" onclick="window.print()">
+            <span>🖨️</span>
+            <span>Print Invoice</span>
+          </button>
+          <a id="confTrackLink" href="#" class="btn btn-secondary">
+            <span>📦</span>
+            <span>Track This Order</span>
+          </a>
+          <a href="index.html" class="btn btn-primary">
+            <span>🛒</span>
+            <span>Continue Shopping</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Toast Notification Container -->
+  <div class="toast-container" id="toastContainer"></div>
+
+  <!-- Footer -->
+  <footer class="footer no-print">
+    <div class="container">
+      <div class="footer-bottom">
+        &copy; 2026 AuraStore Inc. All rights reserved.
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="js/api.js"></script>
+  <script src="js/cart.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/checkout.js"></script>
+</body>
+</html>
